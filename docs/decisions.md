@@ -76,9 +76,13 @@ Topbar shows:
 
 ## Multi-installer Scope
 
-**Scope:** Single-tenant, Enersu only.
+**Scope:** Single installer profile per local installation.
 
-Company data is configurable from settings and stored in SQLite table `parametros`.
+JouleX Solar Quotations is the software identity. The installer company is user-configurable and stored locally. Quotations and PDFs use the configured installer company data where commercial identity is required.
+
+The app can still identify generated documents as created with JouleX Solar Quotations, but the installer company name, RUT, phone, email and address are not hardcoded.
+
+No real installer, client or commercial data should be committed to the public repository.
 
 ---
 

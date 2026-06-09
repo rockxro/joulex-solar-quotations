@@ -1,4 +1,4 @@
-# Enersu - Solar Quotation Desktop App
+# JouleX Solar Quotations
 
 Desktop application for professional solar installation quotation in Chile, built with Tauri 2, React 19 and TypeScript. The app is offline-first, uses a local SQLite database, and generates quotation PDFs.
 
@@ -6,7 +6,7 @@ Desktop application for professional solar installation quotation in Chile, buil
 
 ## Product Goal
 
-Enersu guides a solar installer through a complete quotation workflow:
+JouleX Solar Quotations guides a solar installer through a complete quotation workflow:
 
 1. **Cliente** - client identity, address, tariff and commercial context.
 2. **Consumo** - monthly consumption, demand values and energy prices from the utility bill.

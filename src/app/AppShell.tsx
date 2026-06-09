@@ -90,9 +90,9 @@ export function AppShell() {
         <aside className="border-r border-border/70 bg-sidebar/95 px-4 py-5 shadow-sm backdrop-blur">
           <div className="mb-8 rounded-2xl border border-border bg-card p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-muted-foreground">
-              Enersu
+              JouleX
             </p>
-            <h1 className="mt-2 text-xl font-semibold">Cotizador solar</h1>
+            <h1 className="mt-2 text-xl font-semibold">Solar Quotations</h1>
             <p className="mt-1 text-sm text-muted-foreground">
               Desktop offline para propuestas fotovoltaicas.
             </p>

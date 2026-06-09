@@ -1,12 +1,12 @@
 # Database Schema
 
-Enersu uses SQLite as a local offline database. The file is expected to live in the application data directory.
+JouleX Solar Quotations uses SQLite as a local offline database. The file is expected to live in the application data directory.
 
 Typical locations:
 
-- Windows: `C:\Users\{user}\AppData\Roaming\com.enersu.proyectos\cotizador.db`
-- macOS: `~/Library/Application Support/com.enersu.proyectos/cotizador.db`
-- Linux: `~/.local/share/com.enersu.proyectos/cotizador.db`
+- Windows: `C:\Users\{user}\AppData\Roaming\com.joulex.solar-quotations\cotizador.db`
+- macOS: `~/Library/Application Support/com.joulex.solar-quotations/cotizador.db`
+- Linux: `~/.local/share/com.joulex.solar-quotations/cotizador.db`
 
 ---
 
@@ -98,6 +98,9 @@ Default seed values:
 | `empresa_rut` | `` | Installer company RUT |
 | `empresa_telefono` | `` | Contact phone |
 | `empresa_email` | `` | Contact email |
+| `empresa_direccion` | `` | Installer company address |
+
+These installer company values are local configuration, not JouleX branding. They are used in quotations and PDFs so each installer can present its own commercial identity.
 
 ---
 

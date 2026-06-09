@@ -1,6 +1,6 @@
 # Architecture
 
-Enersu uses a feature-based React frontend inside a Tauri desktop shell. The app is offline-first: no cloud dependency and no network requirement for normal operation.
+JouleX Solar Quotations uses a feature-based React frontend inside a Tauri desktop shell. The app is offline-first: no cloud dependency and no network requirement for normal operation.
 
 ---
 
@@ -152,6 +152,22 @@ Future scope:
 - Initialize schema on first launch.
 - Seed default products and parameters.
 - Store complete quotation snapshots.
+
+---
+
+## Branding and Installer Profile
+
+JouleX Solar Quotations is the software identity. The installer company is a configurable local profile used for commercial documents and quotation output.
+
+The configuration module owns installer data such as:
+
+- Company name.
+- RUT or tax identifier.
+- Phone.
+- Email.
+- Address.
+
+PDFs and quotations should use this installer profile in headers and commercial sections. Public docs and source code must not include real private company or client data.
 
 ---
 

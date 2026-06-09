@@ -2,5 +2,5 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 fn main() {
-    enersu_proyectos_lib::run()
+    joulex_solar_quotations_lib::run()
 }

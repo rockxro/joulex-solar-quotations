@@ -29,7 +29,7 @@ The first template is intentionally fixed and simple. The goal is to produce a p
 
 ## Future Branding Inputs
 
-- Enersu logo.
+- Installer company logo.
 - Corporate colors.
 - Legal/commercial footer.
 - Optional cover page.
