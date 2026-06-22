@@ -19,6 +19,7 @@ type CotizacionState = {
   goToStep: (step: number) => void;
   nextStep: () => void;
   previousStep: () => void;
+  setCliente: (cliente: Cliente | null) => void;
   setTipoSistema: (tipoSistema: TipoSistema) => void;
 };
 
@@ -56,5 +57,6 @@ export const useCotizacionStore = create<CotizacionState>((set) => ({
       activeView: "workflow",
       currentStep: Math.max(state.currentStep - 1, 1),
     })),
+  setCliente: (cliente) => set({ cliente }),
   setTipoSistema: (tipoSistema) => set({ tipoSistema }),
 }));

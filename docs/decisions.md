@@ -91,3 +91,20 @@ No real installer, client or commercial data should be committed to the public r
 **Status:** Deferred.
 
 First version uses a fixed template with client data, calculation results, products and totals. Branding is developed in a later stage.
+
+---
+
+## Code Organization and File Size Limits
+
+**Rule:** Keep individual files under 200 lines where possible.
+
+**Reasoning:** Large files reduce readability and make maintainability more complex. By splitting components, schemas, utility helpers, and constants, we ensure:
+- Easier debugging and unit testing.
+- Faster parsing and editing by developers (and AI assistants).
+- Reuse of code blocks within the same feature.
+
+**Folder Structure:** Inside feature folders (e.g., `src/features/cliente/`), split larger files into:
+- `<Feature>Step.tsx` or `<Feature>Page.tsx` (pure UI and form hook wiring).
+- `<feature>Schema.ts` (Zod schemas, types, and form resolvers).
+- `<feature>Utils.ts` (helper formatting functions and constants).
+

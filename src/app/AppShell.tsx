@@ -201,9 +201,16 @@ export function AppShell() {
               Anterior
             </Button>
             <p className="text-sm text-muted-foreground">
-              El avance validado se conectara con zod en la siguiente etapa.
+              {isWorkflow && activeStep.id === "cliente"
+                ? "Complete los datos requeridos para continuar."
+                : "El avance validado se conectara con zod en la siguiente etapa."}
             </p>
-            <Button disabled={!canGoForward} onClick={nextStep}>
+            <Button
+              disabled={!canGoForward}
+              onClick={isWorkflow && activeStep.id === "cliente" ? undefined : nextStep}
+              type={isWorkflow && activeStep.id === "cliente" ? "submit" : "button"}
+              form={isWorkflow && activeStep.id === "cliente" ? "cliente-form" : undefined}
+            >
               Siguiente
             </Button>
           </footer>
