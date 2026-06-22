@@ -1,39 +1,39 @@
 import type { Resolver } from "react-hook-form";
 import { z } from "zod";
 
-// Formulario local con todos los campos posibles
-export type ClienteFormValues = {
-  esEmpresa: boolean;
-  nombre: string;
-  apellidos: string;
+// Local form values
+export type ClientFormValues = {
+  isCompany: boolean;
+  name: string;
+  lastName: string;
   run: string;
-  razonSocial: string;
+  companyName: string;
   rut: string;
-  direccion: string;
-  comuna: string;
-  companiaElectrica: string;
-  numCliente: string;
+  address: string;
+  comune: string;
+  utilityCompany: string;
+  clientNumber: string;
 };
 
-// Esquema de validación con Zod
-export const clienteSchema = z.object({
-  esEmpresa: z.boolean(),
-  direccion: z.string().min(1, "La dirección es requerida"),
-  comuna: z.string().min(1, "La comuna es requerida"),
-  companiaElectrica: z.string().min(1, "La compañía eléctrica es requerida"),
-  numCliente: z.string().min(1, "El número de cliente es requerido"),
-  nombre: z.string().optional(),
-  apellidos: z.string().optional(),
+// Zod validation schema
+export const clientSchema = z.object({
+  isCompany: z.boolean(),
+  address: z.string().min(1, "La dirección es requerida"),
+  comune: z.string().min(1, "La comuna es requerida"),
+  utilityCompany: z.string().min(1, "La compañía eléctrica es requerida"),
+  clientNumber: z.string().min(1, "El número de cliente es requerido"),
+  name: z.string().optional(),
+  lastName: z.string().optional(),
   run: z.string().optional(),
-  razonSocial: z.string().optional(),
+  companyName: z.string().optional(),
   rut: z.string().optional(),
 }).superRefine((data, ctx) => {
-  if (data.esEmpresa) {
-    if (!data.razonSocial || data.razonSocial.trim() === "") {
+  if (data.isCompany) {
+    if (!data.companyName || data.companyName.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "La razón social es requerida para empresas",
-        path: ["razonSocial"],
+        path: ["companyName"],
       });
     }
     if (!data.rut || data.rut.trim() === "") {
@@ -43,7 +43,7 @@ export const clienteSchema = z.object({
         path: ["rut"],
       });
     } else {
-      // Validación básica de formato RUT (ej: 76.123.456-K o 76123456-K)
+      // Basic validation of RUT format (e.g. 76.123.456-K or 76123456-K)
       const rutRegex = /^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$/;
       if (!rutRegex.test(data.rut.trim())) {
         ctx.addIssue({
@@ -54,18 +54,18 @@ export const clienteSchema = z.object({
       }
     }
   } else {
-    if (!data.nombre || data.nombre.trim() === "") {
+    if (!data.name || data.name.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "El nombre es requerido",
-        path: ["nombre"],
+        path: ["name"],
       });
     }
-    if (!data.apellidos || data.apellidos.trim() === "") {
+    if (!data.lastName || data.lastName.trim() === "") {
       ctx.addIssue({
         code: z.ZodIssueCode.custom,
         message: "Los apellidos son requeridos",
-        path: ["apellidos"],
+        path: ["lastName"],
       });
     }
     if (!data.run || data.run.trim() === "") {
@@ -75,7 +75,7 @@ export const clienteSchema = z.object({
         path: ["run"],
       });
     } else {
-      // Validación básica de formato RUN
+      // Basic validation of RUN format
       const runRegex = /^\d{1,2}\.?\d{3}\.?\d{3}-[\dkK]$/;
       if (!runRegex.test(data.run.trim())) {
         ctx.addIssue({
@@ -88,11 +88,11 @@ export const clienteSchema = z.object({
   }
 });
 
-// Custom Resolver para React Hook Form usando Zod
-export const customResolver: Resolver<ClienteFormValues> = async (values) => {
-  const result = clienteSchema.safeParse(values);
+// Custom Resolver for React Hook Form using Zod
+export const customResolver: Resolver<ClientFormValues> = async (values) => {
+  const result = clientSchema.safeParse(values);
   if (result.success) {
-    return { values: result.data as ClienteFormValues, errors: {} };
+    return { values: result.data as ClientFormValues, errors: {} };
   }
 
   const errors = result.error.issues.reduce((acc: any, current: any) => {

@@ -1,11 +1,11 @@
 export type QuotationStepId =
-  | "cliente"
-  | "consumo"
-  | "dimensionamiento"
-  | "productos"
-  | "cotizacion";
+  | "client"
+  | "consumption"
+  | "sizing"
+  | "products"
+  | "quotation";
 
-export type AdminSectionId = "historial" | "catalogo" | "configuracion";
+export type AdminSectionId = "history" | "catalog" | "configuration";
 
 export type AppView = "workflow" | AdminSectionId;
 
@@ -19,38 +19,38 @@ export type QuotationStep = {
 export const quotationSteps = [
   {
     description: "Datos base del cliente y tarifa.",
-    id: "cliente",
+    id: "client",
     label: "Cliente",
     order: 1,
   },
   {
     description: "Consumos mensuales y datos de boleta.",
-    id: "consumo",
+    id: "consumption",
     label: "Consumo",
     order: 2,
   },
   {
-    description: "Generacion solar, paneles y resultados.",
-    id: "dimensionamiento",
+    description: "Generación solar, paneles y resultados.",
+    id: "sizing",
     label: "Dimensionamiento",
     order: 3,
   },
   {
     description: "Componentes, cantidades y precios.",
-    id: "productos",
+    id: "products",
     label: "Productos",
     order: 4,
   },
   {
     description: "Vista previa, guardado y PDF.",
-    id: "cotizacion",
-    label: "Cotizacion",
+    id: "quotation",
+    label: "Cotización",
     order: 5,
   },
 ] as const satisfies readonly QuotationStep[];
 
 export const adminSections = [
-  { id: "historial", label: "Historial" },
-  { id: "catalogo", label: "Catalogo" },
-  { id: "configuracion", label: "Configuracion" },
+  { id: "history", label: "Historial" },
+  { id: "catalog", label: "Catálogo" },
+  { id: "configuration", label: "Configuración" },
 ] as const satisfies readonly { id: AdminSectionId; label: string }[];

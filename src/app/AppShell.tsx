@@ -13,14 +13,14 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { CatalogoPage } from "@/features/catalogo/CatalogoPage";
-import { ClienteStep } from "@/features/cliente/ClienteStep";
-import { ConfiguracionPage } from "@/features/configuracion/ConfiguracionPage";
-import { ConsumoStep } from "@/features/consumo/ConsumoStep";
-import { CotizacionStep } from "@/features/cotizacion/CotizacionStep";
-import { DimensionamientoStep } from "@/features/dimensionamiento/DimensionamientoStep";
-import { HistorialPage } from "@/features/historial/HistorialPage";
-import { ProductosStep } from "@/features/productos/ProductosStep";
+import { CatalogPage } from "@/features/catalog/CatalogPage";
+import { ClientStep } from "@/features/client/ClientStep";
+import { ConfigurationPage } from "@/features/configuration/ConfigurationPage";
+import { ConsumptionStep } from "@/features/consumption/ConsumptionStep";
+import { QuotationStep } from "@/features/quotation/QuotationStep";
+import { SizingStep } from "@/features/sizing/SizingStep";
+import { HistoryPage } from "@/features/history/HistoryPage";
+import { ProductsStep } from "@/features/products/ProductsStep";
 import { cn } from "@/lib/utils";
 import {
   adminSections,
@@ -28,29 +28,29 @@ import {
   type AdminSectionId,
   type QuotationStepId,
 } from "@/lib/workflow";
-import { useCotizacionStore } from "@/store/cotizacionStore";
+import { useCotizacionStore } from "@/store/quotationStore";
 
 const stepIcons = {
-  cliente: UserRound,
-  consumo: BarChart3,
-  dimensionamiento: Zap,
-  productos: Boxes,
-  cotizacion: FileText,
+  client: UserRound,
+  consumption: BarChart3,
+  sizing: Zap,
+  products: Boxes,
+  quotation: FileText,
 } satisfies Record<QuotationStepId, typeof UserRound>;
 
 const adminIcons = {
-  historial: History,
-  catalogo: BookOpen,
-  configuracion: Settings,
+  history: History,
+  catalog: BookOpen,
+  configuration: Settings,
 } satisfies Record<AdminSectionId, typeof History>;
 
 function renderStep(step: QuotationStepId) {
   const steps = {
-    cliente: <ClienteStep />,
-    consumo: <ConsumoStep />,
-    dimensionamiento: <DimensionamientoStep />,
-    productos: <ProductosStep />,
-    cotizacion: <CotizacionStep />,
+    client: <ClientStep />,
+    consumption: <ConsumptionStep />,
+    sizing: <SizingStep />,
+    products: <ProductsStep />,
+    quotation: <QuotationStep />,
   } satisfies Record<QuotationStepId, React.ReactNode>;
 
   return steps[step];
@@ -58,9 +58,9 @@ function renderStep(step: QuotationStepId) {
 
 function renderAdmin(section: AdminSectionId) {
   const sections = {
-    historial: <HistorialPage />,
-    catalogo: <CatalogoPage />,
-    configuracion: <ConfiguracionPage />,
+    history: <HistoryPage />,
+    catalog: <CatalogPage />,
+    configuration: <ConfigurationPage />,
   } satisfies Record<AdminSectionId, React.ReactNode>;
 
   return sections[section];
@@ -71,8 +71,8 @@ export function AppShell() {
     activeView,
     currentStep,
     maxUnlockedStep,
-    tipoSistema,
-    cliente,
+    systemType,
+    client,
     goToAdmin,
     goToStep,
     nextStep,
@@ -101,7 +101,7 @@ export function AppShell() {
           <nav className="space-y-6">
             <section>
               <p className="px-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Cotizacion activa
+                Cotización activa
               </p>
               <div className="mt-3 space-y-1">
                 {quotationSteps.map((step) => {
@@ -141,7 +141,7 @@ export function AppShell() {
 
             <section>
               <p className="px-2 text-xs font-medium uppercase tracking-[0.18em] text-muted-foreground">
-                Gestion
+                Gestión
               </p>
               <div className="mt-3 space-y-1">
                 {adminSections.map((section) => {
@@ -174,7 +174,7 @@ export function AppShell() {
           <header className="flex items-center justify-between border-b border-border/70 bg-background/75 px-8 py-4 backdrop-blur">
             <div>
               <p className="text-sm text-muted-foreground">
-                {isWorkflow ? `Paso ${currentStep} de ${quotationSteps.length}` : "Gestion"}
+                {isWorkflow ? `Paso ${currentStep} de ${quotationSteps.length}` : "Gestión"}
               </p>
               <h2 className="text-2xl font-semibold">
                 {isWorkflow
@@ -184,10 +184,10 @@ export function AppShell() {
             </div>
             <div className="text-right text-sm">
               <p className="font-medium">
-                {cliente?.nombre || "Cliente sin asignar"}
+                {client?.name || "Cliente sin asignar"}
               </p>
               <p className="text-muted-foreground">
-                Sistema {tipoSistema === "ongrid" ? "On-Grid" : "Hibrido"}
+                Sistema {systemType === "ongrid" ? "On-Grid" : systemType === "hybrid" ? "Híbrido" : "Off-Grid"}
               </p>
             </div>
           </header>
@@ -201,15 +201,15 @@ export function AppShell() {
               Anterior
             </Button>
             <p className="text-sm text-muted-foreground">
-              {isWorkflow && activeStep.id === "cliente"
+              {isWorkflow && ["client", "consumption", "sizing"].includes(activeStep.id)
                 ? "Complete los datos requeridos para continuar."
                 : "El avance validado se conectara con zod en la siguiente etapa."}
             </p>
             <Button
               disabled={!canGoForward}
-              onClick={isWorkflow && activeStep.id === "cliente" ? undefined : nextStep}
-              type={isWorkflow && activeStep.id === "cliente" ? "submit" : "button"}
-              form={isWorkflow && activeStep.id === "cliente" ? "cliente-form" : undefined}
+              onClick={isWorkflow && ["client", "consumption", "sizing"].includes(activeStep.id) ? undefined : nextStep}
+              type={isWorkflow && ["client", "consumption", "sizing"].includes(activeStep.id) ? "submit" : "button"}
+              form={isWorkflow && ["client", "consumption", "sizing"].includes(activeStep.id) ? `${activeStep.id}-form` : undefined}
             >
               Siguiente
             </Button>

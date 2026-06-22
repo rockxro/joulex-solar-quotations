@@ -1,4 +1,4 @@
-// Formateador dinámico de RUT / RUN chileno (12345678K -> 12.345.678-K)
+// Dynamic formatter for Chilean RUT / RUN (12345678K -> 12.345.678-K)
 export function formatRut(value: string) {
   const clean = value.replace(/[^0-9kK]/g, "");
   if (clean.length === 0) return "";
@@ -21,7 +21,7 @@ export function formatRut(value: string) {
   return `${formattedBody}-${dv.toUpperCase()}`;
 }
 
-export const companiasElectricas = [
+export const utilityCompanies = [
   "CGE",
   "Enel",
   "Chilquinta",

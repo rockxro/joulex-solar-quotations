@@ -1,39 +1,41 @@
 import { create } from "zustand";
 
 import { quotationSteps, type AdminSectionId, type AppView } from "@/lib/workflow";
-import type { Cliente } from "@/types/cliente";
-import type { ConsumoData } from "@/types/consumo";
-import type { DimensionamientoData, TipoSistema } from "@/types/dimensionamiento";
-import type { LineaProducto } from "@/types/producto";
+import type { Client } from "@/types/client";
+import type { ConsumptionData } from "@/types/consumption";
+import type { SizingData, SystemType } from "@/types/sizing";
+import type { ProductLine } from "@/types/product";
 
-type CotizacionState = {
+type QuotationState = {
   activeView: AppView;
-  cliente: Cliente | null;
-  consumo: ConsumoData | null;
+  client: Client | null;
+  consumption: ConsumptionData | null;
   currentStep: number;
-  dimensionamiento: DimensionamientoData | null;
+  sizing: SizingData | null;
   maxUnlockedStep: number;
-  productos: LineaProducto[];
-  tipoSistema: TipoSistema;
+  products: ProductLine[];
+  systemType: SystemType;
   goToAdmin: (view: AdminSectionId) => void;
   goToStep: (step: number) => void;
   nextStep: () => void;
   previousStep: () => void;
-  setCliente: (cliente: Cliente | null) => void;
-  setTipoSistema: (tipoSistema: TipoSistema) => void;
+  setClient: (client: Client | null) => void;
+  setConsumption: (consumption: ConsumptionData | null) => void;
+  setSizing: (sizing: SizingData | null) => void;
+  setSystemType: (systemType: SystemType) => void;
 };
 
 const lastStep = quotationSteps.length;
 
-export const useCotizacionStore = create<CotizacionState>((set) => ({
+export const useCotizacionStore = create<QuotationState>((set) => ({
   activeView: "workflow",
-  cliente: null,
-  consumo: null,
+  client: null,
+  consumption: null,
   currentStep: 1,
-  dimensionamiento: null,
+  sizing: null,
   maxUnlockedStep: 1,
-  productos: [],
-  tipoSistema: "ongrid",
+  products: [],
+  systemType: "ongrid",
   goToAdmin: (view) => set({ activeView: view }),
   goToStep: (step) =>
     set((state) => {
@@ -57,6 +59,12 @@ export const useCotizacionStore = create<CotizacionState>((set) => ({
       activeView: "workflow",
       currentStep: Math.max(state.currentStep - 1, 1),
     })),
-  setCliente: (cliente) => set({ cliente }),
-  setTipoSistema: (tipoSistema) => set({ tipoSistema }),
+  setClient: (client) => set({ client }),
+  setConsumption: (consumption) => set({ consumption }),
+  setSizing: (sizing) =>
+    set((state) => ({
+      sizing,
+      systemType: sizing?.systemType ?? state.systemType,
+    })),
+  setSystemType: (systemType) => set({ systemType }),
 }));

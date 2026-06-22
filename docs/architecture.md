@@ -120,6 +120,14 @@ src/lib/
 
 Constants, months, CLP formatting and common utilities.
 
+```text
+src/components/
+```
+
+Shared UI and layout components:
+- `ui/`: Reusable atomic UI components (e.g., `Button.tsx`, `InputField.tsx`, `SelectField.tsx`) compatible with React Hook Form using `React.forwardRef`.
+- `common/`: Shared layout and wrapper components (e.g., `PlaceholderPanel.tsx`).
+
 ---
 
 ## Data Flow

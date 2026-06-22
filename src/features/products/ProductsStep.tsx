@@ -1,9 +1,9 @@
 import { PlaceholderPanel } from "@/components/common/PlaceholderPanel";
 
-export function ProductosStep() {
+export function ProductsStep() {
   return (
     <PlaceholderPanel
-      description="Seleccion de componentes desde catalogo local editable: paneles, inversores, baterias, estructuras y otros."
+      description="Selección de componentes desde catálogo local editable: paneles, inversores, baterías, estructuras y otros."
       eyebrow="Paso 4"
       title="Productos y costos"
     />
